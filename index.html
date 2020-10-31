@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'>
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <script>
+
+      game();
+
+      function computerPlay() {
+        let choices = ['Rock', 'Paper', 'Scissors'];
+        return choices[Math.floor(Math.random() * 3)];
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        if (playerSelection == 'Rock') {
+          if (computerSelection == 'Rock') {
+            console.log("It's a tie.");
+            return 0;
+          }
+          else if (computerSelection == 'Paper') {
+            console.log("You lost. Paper covers Rock.");
+            return -1;
+          }
+          else if (computerSelection == 'Scissors') {
+            console.log("You won! Rock crushes Scissors.");
+            return 1;
+          }
+        }
+        else if (playerSelection == 'Paper') {
+          if (computerSelection == 'Rock') {
+            console.log("You won! Paper covers Rock.");
+            return 1;
+          }
+          else if (computerSelection == 'Paper') {
+            console.log("It's a tie.");
+            return 0;
+          }
+          else if (computerSelection == 'Scissors') {
+            console.log("You lost. Scissors cuts paper.");
+            return -1;
+          }
+        }
+        else if (playerSelection == 'Scissors') {
+          if (computerSelection == 'Rock') {
+            console.log("You lost. Rock crushes Scissors.");
+            return -1;
+          }
+          else if (computerSelection == 'Paper') {
+            console.log("You won! Scissors cuts Paper.");
+            return 1;
+          }
+          else if (computerSelection == 'Scissors') {
+            console.log("It's a tie.");
+            return 0;
+          }
+        }
+      }
+
+      function game() {
+        score = 0;
+        for (let i=0; i<5; i++) {
+          console.log();
+          console.log("##########");
+          console.log("New Round");
+          console.log();
+          let selection = '';
+          while (selection != 'Rock' && selection != 'Paper' &&
+          selection != 'Scissors') {
+            selection = prompt('Enter your choice');
+            selection = selection.toLowerCase();
+            selection = selection.charAt(0).toUpperCase() + selection.slice(1);
+            console.log(`You chose ${selection}`);
+          }
+          computerSelection = computerPlay();
+          console.log(`Computer chose ${computerSelection}`);
+          score += playRound(selection, computerSelection);
+          console.log(score);
+        }
+        if (score < 0) {
+          console.log();
+          console.log("You lost.");
+        }
+        else if (score > 0) {
+          console.log();
+          console.log("You won!");
+        }
+        else {
+          console.log();
+          console.log("It's a tie!");
+        }
+      }
+    </script>
+  </body>
+</html>
